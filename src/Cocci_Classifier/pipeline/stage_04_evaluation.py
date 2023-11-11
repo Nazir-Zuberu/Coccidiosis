@@ -1,6 +1,6 @@
-from cnnClassifier.config.configuration import ConfigurationManager
-from cnnClassifier.components.evaluation import Evaluation
-from cnnClassifier import logger
+from Cocci_Classifier.config.configuration import ConfigurationManager
+from Cocci_Classifier.components.evaluation import Evaluation
+from Cocci_Classifier import logger
 
 
 

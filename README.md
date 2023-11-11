@@ -24,11 +24,11 @@ https://github.com/Nazir-Zuberu/Coccidiosis.git
 ### STEP 01- Create a conda environment after opening the repository
 
 ```bash
-conda create -n cnncls python=3.8 -y
+conda create -n cnnenv python=3.8 -y
 ```
 
 ```bash
-conda activate cnncls
+conda activate cnnenv
 ```
 
 
@@ -55,7 +55,7 @@ open up you local host and port
 2. dvc repro
 3. dvc dag
 
-
+DVC helps in running the various pipelines in the pipeline folder. It will skip an excution if the output of the execution already exist. For instance, if we have already trained the model, the model will not be trained agained when we run the dvc repro command. This takes care of the repetetive operations when we run the main.py. main.py will always perform data ingestion even if the data already exist. This takes time and resources. If the data is already generated, dvc repro will not run the data ingestion command
 
 # AWS-CICD-Deployment-with-Github-Actions
 

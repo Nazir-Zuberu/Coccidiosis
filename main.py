@@ -3,7 +3,7 @@ from Cocci_Classifier import logger
 from Cocci_Classifier.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
 from Cocci_Classifier.pipeline.stage_02_prepare_base_model import PrepareBaseModelTrainingPipeline
 from Cocci_Classifier.pipeline.stage_03_training import ModelTrainingPipeline
-# from Cocci_Classifier.pipeline.stage_04_evaluation import EvaluationPipeline
+from Cocci_Classifier.pipeline.stage_04_evaluation import EvaluationPipeline
 
 
 STAGE_NAME = "Data Ingestion stage"
@@ -47,19 +47,16 @@ except Exception as e:
 
 
 
-
-
-# STAGE_NAME = "Evaluation stage"
-# try:
-#    logger.info(f"*******************")
-#    logger.info(f">>>>>> {STAGE_NAME} started <<<<<<")
-#    model_evalution = EvaluationPipeline()
-#    model_evalution.main()
-#    logger.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\nx==========x")
-
-# except Exception as e:
-#         logger.exception(e)
-#         raise e
+STAGE_NAME = "Evaluation stage"
+try:
+   logger.info(f"*******************")
+   logger.info(f">>>>>> {STAGE_NAME} started <<<<<<")
+   model_evalution = EvaluationPipeline()
+   model_evalution.main()
+   logger.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+        logger.exception(e)
+        raise e
 
 
 

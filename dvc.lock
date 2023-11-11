@@ -1,0 +1,117 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/Cocci_Classifier/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: b0e4746d4decb92e5726e1d26e349c06
+      size: 853
+    - path: src/Cocci_Classifier/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: 14cf427e903ce9bf44f22ac96476640b
+      size: 880
+    outs:
+    - path: artifacts/data_ingestion/Cocci_train_data
+      hash: md5
+      md5: f7637388de31e18ec601d6dee00effbc.dir
+      size: 25408597
+      nfiles: 802
+  prepare_base_model:
+    cmd: python src/Cocci_Classifier/pipeline/stage_02_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: b0e4746d4decb92e5726e1d26e349c06
+      size: 853
+    - path: src/Cocci_Classifier/pipeline/stage_02_prepare_base_model.py
+      hash: md5
+      md5: baf97d5a122e6d6e99af3f259da2012f
+      size: 972
+    params:
+      params.yaml:
+        CLASSES: 2
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        INCLUDE_TOP: false
+        LEARNING_RATE: 0.01
+        WEIGHTS: imagenet
+    outs:
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: ed2a1631e4f2168150d14d090812de6c.dir
+      size: 118059248
+      nfiles: 2
+  training:
+    cmd: python src/Cocci_Classifier/pipeline/stage_03_training.py
+    deps:
+    - path: artifacts/data_ingestion/Cocci_train_data
+      hash: md5
+      md5: f7637388de31e18ec601d6dee00effbc.dir
+      size: 25408597
+      nfiles: 802
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: ed2a1631e4f2168150d14d090812de6c.dir
+      size: 118059248
+      nfiles: 2
+    - path: config/config.yaml
+      hash: md5
+      md5: b0e4746d4decb92e5726e1d26e349c06
+      size: 853
+    - path: src/Cocci_Classifier/components/prepare_callbacks.py
+      hash: md5
+      md5: 3d2b7b719b58b992a5a383cdcb34d4f6
+      size: 979
+    - path: src/Cocci_Classifier/pipeline/stage_03_training.py
+      hash: md5
+      md5: c688e83e804dd00632b9a9ebe15a8c25
+      size: 1231
+    params:
+      params.yaml:
+        AUGMENTATION: true
+        BATCH_SIZE: 16
+        EPOCHS: 3
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+    outs:
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 5b2982a498b313c5ea66f1f47044c42b
+      size: 59340720
+  evaluation:
+    cmd: python src/Cocci_Classifier/pipeline/stage_04_evaluation.py
+    deps:
+    - path: artifacts/data_ingestion/Cocci_train_data
+      hash: md5
+      md5: f7637388de31e18ec601d6dee00effbc.dir
+      size: 25408597
+      nfiles: 802
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 5b2982a498b313c5ea66f1f47044c42b
+      size: 59340720
+    - path: config/config.yaml
+      hash: md5
+      md5: b0e4746d4decb92e5726e1d26e349c06
+      size: 853
+    - path: src/Cocci_Classifier/pipeline/stage_04_evaluation.py
+      hash: md5
+      md5: fccbaaa60700b59a4e791de917af8a46
+      size: 859
+    params:
+      params.yaml:
+        BATCH_SIZE: 16
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+    outs:
+    - path: scores.json
+      hash: md5
+      md5: ae9edc6281e46c0c4d55642785b865b8
+      size: 73
