@@ -155,3 +155,9 @@ docker push chickenapp.azurecr.io/chicken:latest
 2. Push the Docker image to Container Registry
 3. Launch the Web App Server in Azure 
 4. Pull the Docker image from the container registry to Web App server and run 
+
+
+
+#### Tensorboard command
+1. tensorboard --logdir artifacts/prepare_callbacks/tensorboard_log_dir
+2. Click and hold control and then right click on localhost url to open tensorboard on a browser

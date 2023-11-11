@@ -1,11 +1,11 @@
-from cnnClassifier.config.configuration import ConfigurationManager
-from cnnClassifier.components.prepare_callbacks import PrepareCallback
-from cnnClassifier.components.training import Training
-from cnnClassifier import logger
+from Cocci_Classifier.config.configuration import ConfigurationManager
+from Cocci_Classifier.components.prepare_callbacks import PrepareCallback
+from Cocci_Classifier.components.training import Training
+from Cocci_Classifier import logger
 
 
 
-STAGE_NAME = "Training"
+STAGE_NAME = "Training stage"
 
 
 class ModelTrainingPipeline:
@@ -33,10 +33,10 @@ class ModelTrainingPipeline:
 if __name__ == '__main__':
     try:
         logger.info(f"*******************")
-        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+        logger.info(f">>>>>> {STAGE_NAME} started <<<<<<")
         obj = ModelTrainingPipeline()
         obj.main()
-        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+        logger.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\nx==========x")
     except Exception as e:
         logger.exception(e)
         raise e
