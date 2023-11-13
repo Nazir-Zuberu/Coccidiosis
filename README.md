@@ -90,7 +90,7 @@ DVC helps in running the various pipelines in the pipeline folder. It will skip 
 
 	
 ## 3. Create ECR repo to store/save docker image
-    - Save the URI: 566373416292.dkr.ecr.us-east-1.amazonaws.com/chicken
+    - Save the URI: 891670065162.dkr.ecr.us-east-2.amazonaws.com/cocci
 
 	
 ## 4. Create EC2 machine (Ubuntu) 
@@ -113,6 +113,9 @@ DVC helps in running the various pipelines in the pipeline folder. It will skip 
 	sudo usermod -aG docker ubuntu
 
 	newgrp docker
+
+	# Check if docker is runnig
+	docker --version
 	
 # 6. Configure EC2 as self-hosted runner:
     setting>actions>runner>new self hosted runner> choose os> then run command one by one
